@@ -7,7 +7,7 @@ x0 = 0
 v0 = 1
 
 t = 0
-tmax = 10
+tmax = 100
 dt = 0.01
 
 def F(x):
@@ -25,9 +25,7 @@ def explicit(x,v):
     
 def runge_kutta(x,v):
     v_new = v + F(x)*dt
-    k1 = dt*F(x)
-    k2 = dt*F(x+k1/2)
-    x_new = x + .5*(k1+k2)
+    x_new = x + dt/2*(v+v_new)
     return x_new, v_new
     
 def energy(x,v):
@@ -69,6 +67,7 @@ plt.ylabel("Total Energy")
 
 plt.show()
 
+#Some stuff to plot fractional differences from the initial total energy
 plt.plot(t_list, np.abs(E_explicit-E_initial_explicit)/E_initial_explicit, label="Explicit Euler")
 plt.plot(t_list, np.abs(E_semi_implicit-E_initial_semi_implicit)/E_initial_semi_implicit, label="Symlectic Euler")
 plt.plot(t_list, np.abs(E_RK-E_initial_RK)/E_initial_RK, label="2nd-order RK")
