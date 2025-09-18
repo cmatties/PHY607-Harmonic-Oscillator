@@ -7,7 +7,7 @@ x0 = 0
 v0 = 1
 
 t = 0
-tmax = 100
+tmax = 20
 dt = 0.01
 
 def F(x):
@@ -60,6 +60,8 @@ E_initial_RK = E_RK[0]
 plt.plot(t_list, E_explicit, label="Explicit Euler")
 plt.plot(t_list, E_semi_implicit, label="Symplectic Euler")
 plt.plot(t_list, E_RK, label="2nd-order RK")
+
+plt.hlines(E_RK[0], t_list[0], t_list[-1], label="Conserved total energy", color='gray', ls='--')
 plt.legend()
 plt.title("Total Energy")
 plt.xlabel("Time")
